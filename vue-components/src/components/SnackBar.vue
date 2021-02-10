@@ -30,7 +30,9 @@ import EventBus, {ACTIONS} from '../event-bus';
 export default {
     data: () => ({
         snackBarOn: false,
-        icon: ''
+        icon: '',
+        message: '',
+        color: "normal"
     }),
     methods: {
         show(message, color){
