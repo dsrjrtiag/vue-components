@@ -4,13 +4,14 @@
         position.fixed
         :position-left = "center"
         :width = "350"
+        button="true"
     ></k-notification>
 </template>
 
 <script>
 
-import { Notification } from "@progress/kendo-popups-vue-wrapper";
-import EventBus, { ACTIONS } from '../event-bus';
+import { Notification } from "@progress/kendo-popups-vue-wrapper"
+import EventBus, { ACTIONS } from '../event-bus'
 
 export default {
     data: () => ({
@@ -36,7 +37,7 @@ export default {
         }
     },
     mounted(){
-        this.popupNotificationWidget = this.$refs.popupNotification.kendoWidget();
+        this.popupNotificationWidget = this.$refs.popupNotification.kendoWidget()
         EventBus.$on(ACTIONS.KENDOSNACKBAR, (message, type) => {
             this.showNotification(message, type)
         })
