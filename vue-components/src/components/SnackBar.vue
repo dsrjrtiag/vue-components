@@ -4,7 +4,6 @@
         v-model="snackBarOn"
         :color="color"
         timeout=-1
-        
         >
         <v-icon
             dark

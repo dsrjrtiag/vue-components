@@ -1,24 +1,38 @@
 <template>
-    <k-notification ref="popupNotification" :autoHideAfter=-1 position.fixed></k-notification>
+    <k-notification ref="popupNotification" 
+        :autoHideAfter=-1 
+        position.fixed
+        :position-left = "center"
+        :width = "350"
+    ></k-notification>
 </template>
 
 <script>
 
 import { Notification } from "@progress/kendo-popups-vue-wrapper";
 import EventBus, { ACTIONS } from '../event-bus';
+
 export default {
+    data: () => ({
+        center: document.body.clientWidth / 2 - 175,
+        visible: false
+    }),
     components: {
     'k-notification': Notification
     },
     methods: {
         showNotification(message, type){
-            this.popupNotificationWidget.show(message, type);
+            if(this.visible){
+                this.close()
+                this.$nextTick(() => this.showNotification(message, type))
+                return
+            }
+            this.popupNotificationWidget.show(message, type)
+            this.visible = true
         },
-        onClick(){
-            this.popupNotificationWidget.close();
-        },
-        getHeight(){
-            return this.$refs.popupNotification.getHeight()
+        close(){
+            this.popupNotificationWidget.hide()
+            this.visible = false
         }
     },
     mounted(){
